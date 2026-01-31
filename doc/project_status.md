@@ -1,22 +1,18 @@
-# OpenMail Hub - Project Status
+# Pigeon - Project Status
 
-**Current Phase**: Phase 5 (Production Readiness)
-**Status**: 🟡 **IN PROGRESS**
+**Current Phase**: Phase 8 (Refinement & Security Upgrade)
+**Status**: 🟢 **ON TRACK**
 
 ## Completed Milestones
-- [x] **Phase 3 & 4**: Feature Complete (Inbox, Compose, LocalDrop, MediaVault). 
-- [x] **Phase 5.1 & 5.2**: 
-    - [x] **Credential Security**: Fernet encryption + JWT.
-    - [x] **Background Sync**: Daemon thread for IMAP sync.
-- [x] **Phase 5.3**:
-    - [x] **Database Migrations**: Alembic initialized and first migration applied.
-    - [x] **Performance**: Indexes added to `Email` table.
+- [x] **Core Features**: Inbox, Compose, LocalDrop, MediaVault.
+- [x] **Security**: X25519/AES-GCM Encryption, Trusted Devices.
+- [x] **Desktop**: Tauri Integration + Python Sidecar.
+- [x] **Production Prep**: Database Migrations, Background Sync.
 
-## Remaining In Phase 5
-- [ ] **Phase 5.4**: Desktop Packaging (Tauri).
-- [ ] **Phase 5.5**: LocalDrop Encryption.
-- [ ] **Phase 5.6**: UX Essentials (Search, Shortcuts).
-- [ ] **Phase 5.7**: OSS Community Launch Pack.
+## Remaining Tasks
+- [ ] **Phase 8.4**: PegionDrop Links (Email Footer).
+- [ ] **Phase 9**: Launch Polish (Docs, Website).
 
 ## Critical Issues
-- None (Critical blockers resolved).
+- None.
+
