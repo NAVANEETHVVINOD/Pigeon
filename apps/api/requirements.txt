@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+imapclient
+aioimaplib
+aiosmtplib
+zeroconf
+websockets
+python-multipart
+requests
+python-jose[cryptography]
+cryptography
+passlib[bcrypt]
+alembic
