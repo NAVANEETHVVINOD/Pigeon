@@ -66,4 +66,3 @@ cd apps/web
 # Ensure backend sidecar is built (see apps/api/build_sidecar.ps1)
 npm run tauri dev
 ```
-
