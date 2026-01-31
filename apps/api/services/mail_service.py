@@ -36,21 +36,23 @@ def sync_inbox(account: Account):
     Syncs the last 20 emails from IMAP to SQLite.
     Returns the list of emails from DB.
     """
-    # Decrypt password
-    # Note: In a real app we'd handle this more securely
-    # decrypt_password(account.encrypted_password) - assumed available or handled.
-    # For now assuming 'account' has plaintext in this prototype context if valid.
-    # But wait, the function takes `Account` but code used `creds`.
-    # Let's align with the corrupted code's intent which used `creds` global or similar?
-    # No, the previous code had `creds` usage in `sync_inbox` but `creds` wasn't passed.
-    # It seems the file was half-edited.
-    # I will stick to what seems to be the intended logic: using the account object.
-    
-    # MOCK CREDENTIALS if not provided (for prototype stability)
-    # in a real fix we'd query the account.
-    # For now, I will comment out the actual IMAP connection if creds are missing to prevent crash
-    # or assume `account` has them.
-    pass # Placeholder for actual sync logic to avoid further errors until refactored.
+    pass # Managed by background worker
+
+def get_inbox_from_db():
+    with Session(engine) as session:
+        statement = select(Email).order_by(Email.date.desc()).limit(50)
+        results = session.exec(statement).all()
+        return [
+            InboxPreview(
+                id=str(email.id),
+                subject=email.subject or "(No Subject)",
+                sender=email.sender,
+                preview=email.preview,
+                date=email.date.strftime("%Y-%m-%d %H:%M") if email.date else "",
+                is_read=email.is_read
+            )
+            for email in results
+        ]
 
 def get_email_content(email_id: str, creds: dict):
     # Connect to IMAP

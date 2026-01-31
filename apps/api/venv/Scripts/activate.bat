@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=C:\Users\PC\.gemini\antigravity\playground\vacant-coronal\openmail-hub\apps\api\venv"
+set "VIRTUAL_ENV=F:\kannan\projects\openmail-hub\apps\api\venv"
 
 if not defined PROMPT set PROMPT=$P$G
 

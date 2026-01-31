@@ -43,3 +43,38 @@ We strictly use the following components:
 - `Input` / `Textarea` (Forms).
 - `Card` (MediaVault, LocalDrop Peers).
 - `Skeleton` (Loading states).
+
+## 7. Architecture Diagrams
+
+### System Overview
+```mermaid
+graph TD
+    Client[Next.js Client] <-->|HTTP/WS| API[FastAPI Sidecar]
+    API -->|SQL| SQLite[(DB)]
+    API -->|IMAP/SMTP| MailServer[Email Provider]
+    API -->|UDP| ZeroConf[ZeroConf Discovery]
+    API <-->|WS| Peer[LocalDrop Peer]
+```
+
+### LocalDrop Flow
+```mermaid
+sequenceDiagram
+    participant A as Sender
+    participant B as Receiver
+    participant S as Server (Sidecar)
+
+    A->>S: POST /pair/request (includes B IP/Port)
+    S->>B: WS /pair/request
+    B-->>A: WS /pair/approve (Public Key Exchange)
+    Note over A,B: Shared Secret Established (X25519)
+    
+    A->>B: WS FILE_META (Encrypted Metadata)
+    B->>B: Validate Fingerprint & Size
+    B-->>A: WS FILE_ACCEPT
+    
+    A->>B: WS FILE_CHUNK (Encrypted Stream)
+    B->>B: Decrypt & Append
+    A->>B: WS FILE_DONE (Hash)
+    B->>B: Verify SHA256 matches
+    B-->>A: WS TRANSFER_COMPLETE
+```
